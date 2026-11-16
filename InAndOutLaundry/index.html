@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="In and Out Laundry customer portal for services, bookings and order tracking.">
+  <title>In & Out Laundry | Customer Portal</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home"><span class="brand-mark">IO</span><span>In <b>&</b> Out Laundry<small>Freshness, made simple</small></span></a>
+    <nav aria-label="Main navigation">
+      <a href="#services">Services</a><a href="#portal">Customer portal</a><a href="#bookings">Bookings</a><a href="#tracking">Track order</a><a href="#contact">Contact</a>
+    </nav>
+    <button class="btn btn-outline header-action" id="headerLogin" type="button">Sign in</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">LAUNDRY CARE, WITHOUT THE HASSLE</span>
+        <h1>More time for life.<br><em>We'll handle the laundry.</em></h1>
+        <p>Book a collection, choose the service you need and keep track of your laundry in one convenient place.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#portal">Get started</a><a class="text-link" href="#services">Explore services <span>→</span></a></div>
+        <div class="trust-row"><span>✓ Online booking requests</span><span>✓ Shared customer records</span><span>✓ Order updates</span></div>
+      </div>
+      <div class="hero-art" aria-label="Laundry basket illustration"><div class="art-circle"></div><div class="towel towel-one"></div><div class="towel towel-two"></div><div class="basket"><div class="basket-handle"></div><div class="basket-body"><span></span><span></span><span></span><span></span><span></span></div></div><div class="sparkle s1">✦</div><div class="sparkle s2">✧</div></div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-heading"><span class="eyebrow">WHAT WE DO</span><h2>Laundry care that fits your day</h2><p>Services are loaded from your API when the configured endpoint is available.</p></div>
+      <div class="service-grid" id="serviceList">
+        <article class="service-card"><div class="service-icon">◌</div><h3>Wash & Fold</h3><p>Everyday clothes washed, dried and neatly folded.</p><span class="service-tag">Service preview</span></article>
+        <article class="service-card"><div class="service-icon">◇</div><h3>Ironing</h3><p>Freshly pressed clothing, ready for your next day.</p><span class="service-tag">Service preview</span></article>
+        <article class="service-card"><div class="service-icon">⌂</div><h3>Collection & Delivery</h3><p>Arrange a convenient collection and delivery with your booking.</p><span class="service-tag">Service preview</span></article>
+      </div>
+      <p class="form-message center" id="servicesMessage" role="status"></p>
+    </section>
+
+    <section class="how-section" id="how-it-works"><div class="section-heading"><span class="eyebrow">SIMPLE AS 1, 2, 3</span><h2>Clean clothes. Clear process.</h2></div><div class="steps"><div><b>01</b><h3>Create your account</h3><p>Use one account for the website and mobile app once authentication is enabled in the API.</p></div><div><b>02</b><h3>Place a booking</h3><p>Choose your service and collection details.</p></div><div><b>03</b><h3>Follow your order</h3><p>Check order progress and payment status from your customer portal.</p></div></div></section>
+
+    <section class="account-section" id="portal">
+      <div class="account-intro"><span class="eyebrow">YOUR LAUNDRY, YOUR WAY</span><h2>Your customer<br>portal.</h2><p>Sign in to manage your account and bookings, or create a customer profile. Your website communicates with the ASP.NET Core API; the API connects to SQL Server.</p><div class="secure-note"><span>⌑</span><div><b>Your details matter</b><small>Passwords must be hashed by the API. The website must never connect directly to SQL Server.</small></div></div></div>
+      <div class="auth-card">
+        <div class="tabs"><button class="tab active" data-tab="login" type="button">Sign in</button><button class="tab" data-tab="register" type="button">Create account</button><button class="tab" data-tab="profile" type="button">Customer profile</button></div>
+        <form id="loginForm" class="auth-form"><h3>Welcome back</h3><p class="form-subtitle">Sign in with your In & Out Laundry account.</p><label>Email address<input type="email" id="loginEmail" autocomplete="email" placeholder="you@example.com" required></label><label>Password<input type="password" id="loginPassword" autocomplete="current-password" placeholder="Your password" required></label><button class="btn btn-primary full" type="submit">Sign in</button><div class="or"><span>or continue with</span></div><div class="sso-buttons"><button type="button" class="btn btn-sso" data-provider="Google">Google</button><button type="button" class="btn btn-sso" data-provider="Microsoft">Microsoft</button></div><p class="form-message" id="loginMessage" role="status"></p></form>
+        <form id="registerForm" class="auth-form hidden"><h3>Create your account</h3><p class="form-subtitle">Registration is ready on the website; the API registration endpoint must be implemented before it can create login credentials.</p><div class="two-col"><label>First name<input id="firstName" autocomplete="given-name" required></label><label>Surname<input id="lastName" autocomplete="family-name" required></label></div><label>Phone number<input id="phone" type="tel" autocomplete="tel" placeholder="+27 00 000 0000" required></label><label>Email address<input id="registerEmail" type="email" autocomplete="email" required></label><label>Password<input id="registerPassword" type="password" autocomplete="new-password" minlength="12" placeholder="At least 12 characters" required><small class="hint">At least 12 characters, including uppercase, lowercase, a number and a symbol.</small></label><label>Confirm password<input id="confirmPassword" type="password" autocomplete="new-password" required></label><button class="btn btn-primary full" type="submit">Create account</button><p class="form-message" id="registerMessage" role="status"></p></form>
+        <form id="profileForm" class="auth-form hidden"><h3>Create customer profile</h3><p class="form-subtitle">This uses your confirmed POST /api/Customers endpoint. It creates a customer record, not a password/login account.</p><div class="two-col"><label>First name<input id="profileFirstName" required></label><label>Surname<input id="profileLastName" required></label></div><label>Email address<input id="profileEmail" type="email" required></label><label>Phone number<input id="profilePhone" type="tel"></label><label>Address<input id="profileAddress" placeholder="Street, suburb, city"></label><button class="btn btn-primary full" type="submit">Save customer profile</button><p class="form-message" id="profileMessage" role="status"></p></form>
+        <div id="accountPanel" class="account-panel hidden"><div class="success-icon">✓</div><h3>Session active</h3><p id="accountWelcome">Your account is connected.</p><button class="btn btn-primary full" id="loadDashboard" type="button">Load my dashboard</button><button class="btn btn-outline full" id="logoutButton" type="button">Sign out</button></div>
+      </div>
+    </section>
+
+    <section class="dashboard-section" id="dashboard"><div class="section-heading"><span class="eyebrow">CUSTOMER AREA</span><h2>Your laundry overview</h2><p>These panels request live information from the API when the relevant routes are configured.</p></div><div class="dashboard-grid">
+      <article class="dashboard-card"><div class="card-heading"><h3>My profile</h3><button class="small-button" data-load="profile" type="button">Refresh</button></div><div id="profileData" class="data-list">Sign in and load your profile to view account information.</div></article>
+      <article class="dashboard-card"><div class="card-heading"><h3>My bookings</h3><button class="small-button" data-load="bookings" type="button">Refresh</button></div><div id="bookingData" class="data-list">No booking data loaded.</div></article>
+      <article class="dashboard-card"><div class="card-heading"><h3>My orders</h3><button class="small-button" data-load="orders" type="button">Refresh</button></div><div id="orderData" class="data-list">No order data loaded.</div></article>
+      <article class="dashboard-card"><div class="card-heading"><h3>Notifications</h3><button class="small-button" data-load="notifications" type="button">Refresh</button></div><div id="notificationData" class="data-list">No notifications loaded.</div></article>
+    </div><p class="form-message center" id="dashboardMessage" role="status"></p></section>
+
+    <section class="section booking-section" id="bookings"><div class="section-heading"><span class="eyebrow">BOOK A COLLECTION</span><h2>Request a laundry booking</h2><p>Complete the form to send a booking request to the API. The endpoint and field names must match your BookingsController.</p></div><form id="bookingForm" class="wide-form"><div class="two-col"><label>Customer ID<input id="bookingCustomerId" type="number" min="1" required placeholder="Your customer ID"></label><label>Service<select id="bookingService" required><option value="">Select a service</option><option value="WashFold">Wash & Fold</option><option value="Ironing">Ironing</option><option value="DryClean">Dry cleaning</option></select></label></div><div class="two-col"><label>Collection date and time<input id="bookingDate" type="datetime-local" required></label><label>Estimated weight (kg)<input id="bookingWeight" type="number" min="0.1" step="0.1" required></label></div><label>Collection address<input id="bookingAddress" required placeholder="Collection address"></label><label>Special instructions<textarea id="bookingNotes" rows="3" placeholder="Optional instructions"></textarea></label><button class="btn btn-primary" type="submit">Submit booking request</button><p class="form-message" id="bookingMessage" role="status"></p></form></section>
+
+    <section class="tracking-section" id="tracking"><div class="section-heading"><span class="eyebrow">ORDER PROGRESS</span><h2>Track your laundry</h2><p>Enter an order ID to request its latest status from your API.</p></div><form id="trackingForm" class="tracking-form"><label>Order ID<input id="trackingOrderId" type="number" min="1" required placeholder="Enter order ID"></label><button class="btn btn-primary" type="submit">Track order</button></form><div id="trackingResult" class="tracking-result" role="status">Your tracking details will appear here.</div></section>
+
+    <section class="payment-section" id="payments"><div class="section-heading"><span class="eyebrow">CHECKOUT OPTIONS</span><h2>Pay in a way that works for you</h2><p>Select a preferred payment method. Actual payment processing requires a configured payment gateway and a matching API endpoint.</p></div><div class="payment-grid"><label class="payment-option"><input type="radio" name="paymentMethod" value="Card" checked><span class="pay-symbol">▣</span><b>Bank card</b><small>Visa or Mastercard through a secure hosted payment provider.</small></label><label class="payment-option"><input type="radio" name="paymentMethod" value="InstantEFT"><span class="pay-symbol">⇄</span><b>Instant EFT</b><small>Pay through a supported bank payment provider.</small></label><label class="payment-option"><input type="radio" name="paymentMethod" value="Cash"><span class="pay-symbol">R</span><b>Cash</b><small>Subject to business policy and availability.</small></label></div><div class="payment-action"><label>Booking ID<input id="paymentBookingId" type="number" min="1" placeholder="Booking ID required"></label><button class="btn btn-primary" id="continuePayment" type="button">Continue to payment</button></div><p class="form-message center" id="paymentMessage" role="status"></p></section>
+
+    <section class="section contact-section" id="contact"><div class="section-heading"><span class="eyebrow">GET IN TOUCH</span><h2>How can we help?</h2><p>Send a message to the In & Out Laundry team.</p></div><form id="contactForm" class="wide-form"><div class="two-col"><label>Name<input id="contactName" required></label><label>Email<input id="contactEmail" type="email" required></label></div><label>Subject<input id="contactSubject" required></label><label>Message<textarea id="contactBody" rows="4" required></textarea></label><button class="btn btn-primary" type="submit">Send message</button><p class="form-message" id="contactMessage" role="status"></p></form></section>
+
+    <section class="admin-section" id="admin"><div class="section-heading"><span class="eyebrow">STAFF ACCESS</span><h2>Administration</h2><p>Administrative functions must be protected by API-side role authorization. This panel is a placeholder until the admin endpoints and roles are confirmed.</p></div><div class="admin-notice">Admin dashboard access is not enabled by this front-end alone. The API must validate the JWT and the user's role for every administrative operation.</div></section>
+  </main>
+  <footer><a class="brand footer-brand" href="#home"><span class="brand-mark">IO</span><span>In <b>&</b> Out Laundry<small>Freshness, made simple</small></span></a><p>© <span id="year"></span> In & Out Laundry. All rights reserved.</p></footer>
+  <script src="js/config.js"></script><script src="js/app.js"></script>
+</body>
+</html>
